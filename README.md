@@ -363,7 +363,6 @@ const response = await fetch('/api/chat', {
 ### Technical Specifications
 - **Knowledge Base**: 19+ curated knowledge items
 - **Vector Dimensions**: 1024-dimensional embeddings  
-- **Context Window**: 1M token capacity (GPT-4o-mini)
 - **Evaluation Framework**: RAGAS industry-standard metrics
 
 ## 📊 System Observability & Tracing
