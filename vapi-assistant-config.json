@@ -1,0 +1,83 @@
+{
+  "name": "Aven AI Customer Support Assistant",
+  "model": {
+    "provider": "openai",
+    "model": "gpt-4.1-mini",
+    "temperature": 0.7,
+    "systemMessage": "You are Aven's AI voice assistant specializing in helping customers with questions about the Aven HELOC Credit Card and related financial services. You are friendly, professional, and knowledgeable. Keep responses concise and conversational for voice delivery. ALWAYS use the searchKnowledge function for ANY customer question about Aven products, services, rates, eligibility, or processes to ensure accurate information from the knowledge base.",
+    "functions": [
+      {
+        "name": "searchKnowledge",
+        "description": "Search the Aven knowledge base for specific information about products, services, policies, or procedures. Use this for ALL customer questions about Aven.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "query": {
+              "type": "string",
+              "description": "The search query to find relevant information in the knowledge base. Include key terms from the customer's question."
+            }
+          },
+          "required": ["query"]
+        }
+      }
+    ]
+  },
+  "voice": {
+    "provider": "11labs",
+    "voiceId": "21m00Tcm4TlvDq8ikWAM",
+    "stability": 0.5,
+    "similarityBoost": 0.75,
+    "style": 0.5,
+    "useSpeakerBoost": true
+  },
+  "transcriber": {
+    "provider": "deepgram",
+    "model": "nova-2",
+    "language": "en-US",
+    "smartFormat": true
+  },
+  "functionCallingConfig": {
+    "requireConfirmation": false,
+    "timeoutMs": 30000
+  },
+  "serverUrl": "http://localhost:3000/api/voice/webhook",
+  "serverUrlSecret": "dev-webhook-secret",
+  "recordingEnabled": false,
+  "endCallMessage": "Thank you for contacting Aven! Have a great day.",
+  "endCallPhrases": ["goodbye", "bye", "end call", "hang up", "that's all"],
+  "backgroundSound": "off",
+  "backchannelingEnabled": true,
+  "backgroundDenoisingEnabled": true,
+  "modelOutputInMessagesEnabled": true,
+  "transportConfigurations": [
+    {
+      "provider": "twilio",
+      "timeout": 600,
+      "record": false
+    }
+  ],
+  "clientMessages": [
+    "transcript",
+    "hang",
+    "function-call",
+    "speech-update",
+    "metadata",
+    "conversation-update"
+  ],
+  "serverMessages": [
+    "conversation-update",
+    "function-call",
+    "hang",
+    "speech-update"
+  ],
+  "silenceTimeoutSeconds": 30,
+  "maxDurationSeconds": 1800,
+  "responseDelaySeconds": 0.4,
+  "llmRequestDelaySeconds": 0.1,
+  "numWordsToInterruptAssistant": 2,
+  "metadata": {
+    "purpose": "Aven HELOC Credit Card customer support",
+    "version": "1.0",
+    "knowledgeBase": "aven.com data via RAG pipeline"
+  }
+}

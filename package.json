@@ -1,0 +1,45 @@
+{
+  "name": "ai-customer-agent",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@langchain/openai": "^0.0.28",
+    "@pinecone-database/pinecone": "^2.2.2",
+    "@tailwindcss/typography": "^0.5.16",
+    "@vapi-ai/server-sdk": "^0.1.0",
+    "@vapi-ai/web": "^2.3.8",
+    "axios": "^1.10.0",
+    "cheerio": "^1.1.0",
+    "date-fns": "^2.30.0",
+    "dotenv": "^17.2.0",
+    "exa-js": "^1.8.20",
+    "langfuse": "^3.38.4",
+    "mem0ai": "^2.1.36",
+    "next": "^14.0.0",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.104.0",
+    "puppeteer": "^24.12.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-markdown": "^10.1.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "autoprefixer": "^10.4.0",
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5.0.0"
+  }
+}
