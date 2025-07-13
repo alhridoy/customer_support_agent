@@ -408,15 +408,15 @@ Each step includes timing metrics, token usage, and intermediate outputs for com
 #### Voice Pipeline Tracing
 ![Voice Pipeline Traces](docs/voice_pipeline.png)
 
-The voice processing trace shows the complete speech-to-text-to-speech flow:
-- **Speech-to-Text**: Audio transcription using Deepgram's Nova-2 model
-- **Query Analysis**: Processing of transcribed text through RAG pipeline
-- **Knowledge Retrieval**: Context-aware document search and ranking
-- **Response Generation**: Conversational response optimized for voice delivery
-- **Text-to-Speech**: Audio synthesis for natural voice response
-- **Conversation Storage**: Persistent memory storage for context retention
+The voice processing trace shows detailed query analysis and intent classification:
+- **Speech-to-Text**: Audio transcription converting "Hey" to structured input
+- **Query Analysis**: Intent classification with entity extraction (aven, heloc, credit_card)
+- **Knowledge Retrieval**: Context-aware document search through multiple steps
+- **Response Generation**: LLM synthesis using OpenAI and 11labs services  
+- **Text-to-Speech**: Audio synthesis for natural conversational delivery
+- **Conversation Storage**: Memory persistence for context continuity
 
-Performance metrics include latency (0.00s shown), confidence scores (95%), and cost tracking ($0.01 per operation).
+The trace reveals query_type: "product_information", intent: "information_request", and entities: ["aven", "heloc", "credit_card"] with complexity: "medium". Performance includes 0.00s latency and 200ms processing duration.
 
 ## 🔧 Development
 
