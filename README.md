@@ -22,10 +22,10 @@ graph TB
     end
 
     subgraph API ["API Layer"]
-        API1[/api/chat]
-        API2[/api/voice/webhook]
-        API3[/api/meetings]
-        API4[/api/evaluate]
+        API1["POST /api/chat"]
+        API2["POST /api/voice/webhook"]
+        API3["GET /api/meetings"]
+        API4["POST /api/evaluate"]
     end
 
     subgraph PROC ["Core Processing Engine"]
@@ -43,17 +43,17 @@ graph TB
     end
 
     subgraph AI ["AI Models"]
-        AI1[GPT-4.1-mini]
-        AI2[text-embedding-3-small]
-        AI3[gpt-4o-transcribe]
-        AI4[gpt-4o-mini-tts]
+        AI1["GPT-4.1-mini"]
+        AI2["text-embedding-3-small"]
+        AI3["gpt-4o-transcribe"]
+        AI4["gpt-4o-mini-tts"]
     end
 
     subgraph EVAL ["Evaluation System"]
-        EVAL1[50+ Test Questions]
-        EVAL2[RAGAS Framework]
-        EVAL3[LangFuse Analytics]
-        EVAL4[Performance Metrics]
+        EVAL1["50+ Test Questions"]
+        EVAL2["RAGAS Framework"]
+        EVAL3["LangFuse Analytics"]
+        EVAL4["Performance Metrics"]
     end
 
     subgraph EXT ["External Services"]
