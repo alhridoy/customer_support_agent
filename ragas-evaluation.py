@@ -14,13 +14,15 @@ from typing import List, Dict, Any
 from datasets import Dataset
 from ragas import evaluate
 from ragas.metrics import (
-    faithfulness,
-    answer_relevancy,
-    context_precision,
-    context_recall,
-    answer_similarity,
-    answer_correctness
+    Faithfulness,
+    ResponseRelevancy,
+    LLMContextPrecisionWithoutReference,
+    LLMContextRecall,
+    SemanticSimilarity,
+    FactualCorrectness
 )
+from ragas.llms import LangchainLLMWrapper
+from ragas.embeddings import LangchainEmbeddingsWrapper
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 import pandas as pd
 from dotenv import load_dotenv
@@ -35,25 +37,25 @@ class RAGASEvaluator:
             raise ValueError("OPENAI_API_KEY not found in environment variables")
         
         # Initialize RAGAS with OpenAI models
-        self.llm = ChatOpenAI(
-            model="gpt-4.1-mini",
+        self.llm = LangchainLLMWrapper(ChatOpenAI(
+            model="gpt-4o-mini",
             temperature=0,
             api_key=self.openai_api_key
-        )
+        ))
         
-        self.embeddings = OpenAIEmbeddings(
+        self.embeddings = LangchainEmbeddingsWrapper(OpenAIEmbeddings(
             model="text-embedding-3-small",
             api_key=self.openai_api_key
-        )
+        ))
         
         # Configure RAGAS metrics
         self.metrics = [
-            faithfulness,
-            answer_relevancy,
-            context_precision,
-            context_recall,
-            answer_similarity,
-            answer_correctness
+            Faithfulness(),
+            ResponseRelevancy(),
+            LLMContextPrecisionWithoutReference(),
+            LLMContextRecall(),
+            SemanticSimilarity(),
+            FactualCorrectness()
         ]
         
         print("🎯 RAGAS Evaluator initialized with OpenAI models")
@@ -115,7 +117,7 @@ class RAGASEvaluator:
         """Query the local RAG pipeline"""
         try:
             response = requests.post(
-                'http://localhost:3002/api/chat',
+                'http://localhost:3004/api/chat',
                 json={
                     'message': question,
                     'userId': 'ragas-eval'
@@ -173,7 +175,7 @@ class RAGASEvaluator:
     async def run_ragas_evaluation(self, dataset: Dataset) -> Dict[str, Any]:
         """Run RAGAS evaluation on the dataset"""
         print("🧪 Running RAGAS evaluation...")
-        print(f"   Metrics: {[metric.name for metric in self.metrics]}")
+        print(f"   Metrics: {[metric.__class__.__name__ for metric in self.metrics]}")
         
         try:
             # Run evaluation
@@ -190,6 +192,8 @@ class RAGASEvaluator:
             
         except Exception as e:
             print(f"❌ RAGAS evaluation failed: {e}")
+            import traceback
+            traceback.print_exc()
             return None
 
     def generate_ragas_report(self, results: Dict[str, Any], dataset: Dataset) -> None:
@@ -206,18 +210,48 @@ class RAGASEvaluator:
         print("\n🎯 OVERALL RAGAS SCORES:")
         metrics_scores = {}
         
-        for metric in self.metrics:
-            metric_name = metric.name
-            if metric_name in results:
-                score = results[metric_name]
-                metrics_scores[metric_name] = score
-                print(f"   {metric_name:20}: {score:.3f} ({self.get_score_interpretation(metric_name, score)})")
+        # Handle RAGAS result format - try to access scores from the result object
+        try:
+            # Get metrics from the result
+            for metric in self.metrics:
+                metric_name = metric.__class__.__name__.lower()
+                # Try different ways to access scores
+                score = None
+                if hasattr(results, metric_name):
+                    score = getattr(results, metric_name)
+                elif hasattr(results, 'scores') and metric_name in results.scores:
+                    score = results.scores[metric_name]
+                elif metric_name in str(results):
+                    # Parse from string representation if needed
+                    continue
+                
+                if score is not None:
+                    if hasattr(score, 'mean'):
+                        score = score.mean()
+                    metrics_scores[metric_name] = float(score)
+                    print(f"   {metric_name:20}: {score:.3f} ({self.get_score_interpretation(metric_name, score)})")
+            
+            # Try to extract scores from pandas DataFrame if available
+            if hasattr(results, 'to_pandas'):
+                df = results.to_pandas()
+                for col in df.columns:
+                    if col != 'user_input' and col != 'retrieved_contexts' and col != 'response' and col != 'reference':
+                        score = df[col].mean()
+                        metrics_scores[col] = float(score)
+                        print(f"   {col:20}: {score:.3f} ({self.get_score_interpretation(col, score)})")
+        
+        except Exception as e:
+            print(f"   ⚠️ Error parsing scores: {e}")
+            # Fallback: print raw results
+            print(f"   Raw results: {results}")
         
         # Calculate overall RAGAS score
         if metrics_scores:
             overall_score = sum(metrics_scores.values()) / len(metrics_scores)
             grade = self.get_overall_grade(overall_score)
             print(f"\n🎓 OVERALL RAGAS SCORE: {overall_score:.3f} ({grade})")
+        else:
+            print("\n⚠️ Could not calculate overall score - no valid metrics found")
         
         # Detailed breakdown
         print("\n📋 METRICS BREAKDOWN:")

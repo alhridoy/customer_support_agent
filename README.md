@@ -195,51 +195,48 @@ graph LR
 
 ## 📊 Performance Metrics & Evaluation Results
 
-### Overall System Performance (Grade A - 84.5%)
+### Overall System Performance (Grade C - 65.4%)
 
 | Metric | Score | Grade | Description |
 |--------|-------|-------|-------------|
-| **Overall Performance** | 84.5% | A | Combined system effectiveness |
-| **Accuracy** | 76.4% | B+ | Factual correctness |
-| **Helpfulness** | 92.7% | A+ | User satisfaction and completeness |
-| **Response Time** | 6.81s | B | Average processing speed |
-| **Source Quality** | 5.0 avg | A | Retrieved document relevance |
+| **RAGAS Overall Score** | 65.4% | C | Industry-standard RAG evaluation |
+| **Answer Relevancy** | 76.5% | B+ | How well answers address questions |
+| **Context Recall** | 75.0% | B+ | Completeness of context retrieval |
+| **Faithfulness** | 71.6% | B | Response grounding in retrieved context |
+| **Semantic Similarity** | 67.1% | C+ | Similarity to expected answers |
 
-### RAGAS Evaluation Metrics (Industry Standard)
+### RAGAS Evaluation Metrics (Industry Standard - Real Results)
 
-| RAGAS Metric | Score Range | Description | Our Score |
-|--------------|-------------|-------------|-----------|
-| **Faithfulness** | 0.0 - 1.0 | Measures response grounding in retrieved context | 0.82 |
-| **Answer Relevancy** | 0.0 - 1.0 | Evaluates how well answers address specific questions | 0.89 |
-| **Context Precision** | 0.0 - 1.0 | Relevance of retrieved contexts to the query | 0.78 |
-| **Context Recall** | 0.0 - 1.0 | Comprehensiveness of context retrieval | 0.85 |
-| **Answer Similarity** | 0.0 - 1.0 | Semantic similarity to expected answers | 0.81 |
-| **Answer Correctness** | 0.0 - 1.0 | Overall accuracy and factual correctness | 0.83 |
+| RAGAS Metric | Score Range | Description | **Our Real Score** |
+|--------------|-------------|-------------|-------------------|
+| **Faithfulness** | 0.0 - 1.0 | Measures response grounding in retrieved context | **0.716 (Good)** |
+| **Answer Relevancy** | 0.0 - 1.0 | Evaluates how well answers address specific questions | **0.765 (Good)** |
+| **Context Precision** | 0.0 - 1.0 | Relevance of retrieved contexts to the query | **0.585 (Poor)** |
+| **Context Recall** | 0.0 - 1.0 | Comprehensiveness of context retrieval | **0.750 (Good)** |
+| **Semantic Similarity** | 0.0 - 1.0 | Semantic similarity to expected answers | **0.671 (Fair)** |
+| **Factual Correctness** | 0.0 - 1.0 | Overall accuracy and factual correctness | **0.439 (Very Poor)** |
 
-**RAGAS Average Score: 0.83/1.0 (83%)**
+**🎓 RAGAS Overall Score: 0.654/1.0 (65.4%) - Grade C**
 
-### Custom Evaluation Metrics (Business-Specific)
+### Performance Analysis & Recommendations
 
-| Custom Metric | Score Range | Description | Our Score |
-|---------------|-------------|-------------|-----------|
-| **Response Completeness** | 0.0 - 1.0 | Length and thoroughness analysis | 0.91 |
-| **Context Utilization** | 0.0 - 1.0 | Effectiveness of retrieved context usage | 0.86 |
-| **Response Efficiency** | 0.0 - 1.0 | Speed vs quality optimization | 0.74 |
-| **Answer Specificity** | 0.0 - 1.0 | Presence of specific facts and details | 0.88 |
-| **Ground Truth Coverage** | 0.0 - 1.0 | Alignment with expected responses | 0.84 |
+Based on the real RAGAS evaluation results, here are the key findings:
 
-**Custom Metrics Average Score: 0.85/1.0 (85%)**
+#### 🎯 **Strengths**
+- **Answer Relevancy (76.5%)**: Good at addressing user questions directly
+- **Context Recall (75.0%)**: Effective at retrieving relevant information
+- **Faithfulness (71.6%)**: Responses are reasonably grounded in sources
 
-### Category Performance Breakdown (52 Questions)
+#### ⚠️ **Areas for Improvement**
+- **Factual Correctness (43.9%)**: Critical issue - accuracy needs significant improvement
+- **Context Precision (58.5%)**: Retrieval includes too much irrelevant information
+- **Semantic Similarity (67.1%)**: Generated responses could be more similar to expected answers
 
-| Category | Questions | Avg Score | Performance | Top Query Type |
-|----------|-----------|-----------|-------------|----------------|
-| **Product Features** | 12 | 85.2% | A | Credit limits & maximums |
-| **Rates & Fees** | 10 | 82.1% | B+ | Interest rate ranges |
-| **Rewards Benefits** | 8 | 88.5% | A+ | Cashback percentages |
-| **Eligibility Requirements** | 9 | 79.8% | B+ | Credit score requirements |
-| **Application Process** | 7 | 86.3% | A | Approval timeline |
-| **Partnerships & Protection** | 6 | 84.7% | A | Banking relationships |
+#### 🔧 **Immediate Action Items**
+1. **Fix Factual Accuracy**: Review knowledge base for inconsistencies
+2. **Improve Retrieval Precision**: Optimize vector search and reranking
+3. **Enhance Answer Generation**: Fine-tune prompts for more accurate responses
+4. **Expand Evaluation Dataset**: Test with more comprehensive question set
 
 ### Evaluation Commands
 
@@ -375,17 +372,17 @@ const response = await fetch('/api/chat', {
 
 ## 📈 System Performance
 
-### Response Quality
-- **Grade A Performance**: 84.5% overall effectiveness
-- **High Helpfulness**: 92.7% user satisfaction
-- **Accurate Information**: 76.4% factual correctness
-- **Fast Processing**: 6.8 second average response time
+### Current Performance (Real RAGAS Evaluation)
+- **Overall Grade**: C (65.4%) - Industry standard RAG evaluation
+- **Best Performance**: Answer Relevancy (76.5%) and Context Recall (75.0%)
+- **Critical Issue**: Factual Correctness (43.9%) needs immediate attention
+- **Evaluation**: 12 questions across 6 Aven HELOC categories
 
-### Scalability Metrics
+### Technical Specifications
 - **Knowledge Base**: 19+ curated knowledge items
-- **Vector Dimensions**: 1024-dimensional embeddings
-- **Context Window**: 1M token capacity
-- **Evaluation Coverage**: 15 comprehensive test scenarios
+- **Vector Dimensions**: 1024-dimensional embeddings  
+- **Context Window**: 1M token capacity (GPT-4o-mini)
+- **Evaluation Framework**: RAGAS industry-standard metrics
 
 ## 📊 System Observability & Tracing
 
