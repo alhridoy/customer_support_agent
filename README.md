@@ -415,7 +415,7 @@ Root files:
 ├── run-eval.js       # Evaluation runner
 ├── ragas-evaluation.py    # RAGAS framework
 ├── enhanced-rag-evaluation.py  # Custom metrics
-└── evals.md          # Evaluation documentation
+
 ```
 
 ### Key Design Decisions
