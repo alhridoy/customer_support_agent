@@ -357,14 +357,3 @@ Root files:
 4. **Memory Integration**: Persistent conversation context
 5. **Performance Optimization**: Caching and efficient retrieval
 
-## 📄 License
-
-MIT License - see LICENSE file for details.
-
-## 🙏 Acknowledgments
-
-Built for Aven's HELOC Credit Card customer support with focus on accuracy, performance, and user experience.
-
----
-
-**System Grade: A (84.5%) | Response Time: 6.8s | Helpfulness: 92.7%**
