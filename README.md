@@ -220,13 +220,81 @@ graph LR
 
 
 
+## 📝 Evaluation Dataset Generation Strategy
+
+### **52-Question Comprehensive Dataset Creation**
+
+I developed a strategic approach to generate realistic evaluation data covering all aspects of Aven's HELOC Credit Card:
+
+#### **🎯 Multi-Category Coverage Strategy**
+```json
+{
+  "product_features": 12,      // 23% - Core functionality & limits
+  "rates_fees": 10,           // 19% - Pricing & costs
+  "eligibility_requirements": 10, // 19% - Qualification criteria  
+  "rewards_benefits": 8,      // 15% - Cashback & travel rewards
+  "application_process": 6,   // 12% - Apply & approval workflow
+  "partnerships_protection": 6 // 12% - Banking & security
+}
+```
+
+#### **📊 Complexity Distribution**
+- **Basic (40%)**: Direct product information queries
+- **Intermediate (40%)**: Multi-faceted synthesis questions  
+- **Advanced (20%)**: Complex comparisons & edge cases
+
+#### **🔍 Question Generation Methodology**
+
+**1. Domain Knowledge Analysis**
+- Analyzed Exa AI scraped content from aven.com
+- Identified key customer pain points and FAQs
+- Extracted factual information for ground truth validation
+
+**2. Customer Journey Mapping**
+```
+Discovery → Research → Application → Usage → Support
+    ↓         ↓           ↓         ↓        ↓
+Questions about features, rates, eligibility, benefits, help
+```
+
+**3. Realistic Question Patterns**
+- **Factual**: "What is the maximum credit limit?"
+- **Comparative**: "How does Aven compare to traditional cards?"  
+- **Procedural**: "How fast can I get approved?"
+- **Conditional**: "What if my home value decreases?"
+
+**4. Ground Truth Validation**
+- Each question includes verified ground truth answers
+- Expected source references for context validation
+- Complexity classification for targeted testing
+
+#### **🏗️ Technical Implementation**
+
+**Dataset Structure:**
+```typescript
+interface EvaluationQuestion {
+  id: number
+  category: string
+  complexity: "basic" | "intermediate" | "advanced"  
+  question: string
+  ground_truth: string
+  expected_sources: string[]
+}
+```
+
+**Quality Assurance Process:**
+1. **Factual Verification**: Cross-referenced with aven.com content
+2. **Linguistic Diversity**: Varied question formulations  
+3. **Edge Case Coverage**: Bankruptcy, property sales, co-borrowers
+4. **Real User Scenarios**: Based on common customer inquiries
+
 ### Evaluation Commands
 
 ```bash
-# Run RAGAS industry-standard evaluation
+# Run RAGAS industry-standard evaluation (52 questions)
 python3 ragas-evaluation.py
 
-# Run enhanced custom evaluation with 52 questions
+# Run enhanced custom evaluation with detailed metrics
 python3 enhanced-rag-evaluation.py
 
 # Quick evaluation suite
