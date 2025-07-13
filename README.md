@@ -216,27 +216,9 @@ graph LR
 | **Semantic Similarity** | 0.0 - 1.0 | Semantic similarity to expected answers | **0.671 (Fair)** |
 | **Factual Correctness** | 0.0 - 1.0 | Overall accuracy and factual correctness | **0.439 (Very Poor)** |
 
-**🎓 RAGAS Overall Score: 0.654/1.0 (65.4%) - Grade C**
+**🎓 RAGAS Overall Score: 0.654/1.0 (65.4%) -
 
-### Performance Analysis & Recommendations
 
-Based on the real RAGAS evaluation results, here are the key findings:
-
-#### 🎯 **Strengths**
-- **Answer Relevancy (76.5%)**: Good at addressing user questions directly
-- **Context Recall (75.0%)**: Effective at retrieving relevant information
-- **Faithfulness (71.6%)**: Responses are reasonably grounded in sources
-
-#### ⚠️ **Areas for Improvement**
-- **Factual Correctness (43.9%)**: Critical issue - accuracy needs significant improvement
-- **Context Precision (58.5%)**: Retrieval includes too much irrelevant information
-- **Semantic Similarity (67.1%)**: Generated responses could be more similar to expected answers
-
-#### 🔧 **Immediate Action Items**
-1. **Fix Factual Accuracy**: Review knowledge base for inconsistencies
-2. **Improve Retrieval Precision**: Optimize vector search and reranking
-3. **Enhance Answer Generation**: Fine-tune prompts for more accurate responses
-4. **Expand Evaluation Dataset**: Test with more comprehensive question set
 
 ### Evaluation Commands
 
