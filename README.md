@@ -333,6 +333,37 @@ const response = await fetch('/api/chat', {
 - **Context Window**: 1M token capacity
 - **Evaluation Coverage**: 15 comprehensive test scenarios
 
+## 📊 System Observability & Tracing
+
+### LangFuse Integration
+The system provides comprehensive observability through LangFuse tracing, enabling real-time monitoring of both RAG and voice pipelines with detailed performance analytics.
+
+#### RAG Pipeline Tracing
+![RAG Traces](docs/rag_traces.png)
+
+The RAG pipeline trace captures the complete 6-step processing workflow:
+- **Query Analysis**: Initial question understanding and intent classification
+- **Memory Search**: Retrieval of relevant conversation context from MEM0
+- **Knowledge Search**: Vector-based document retrieval from Pinecone
+- **Document Reranking**: Relevance scoring and context optimization
+- **Context Assembly**: Intelligent combining of sources and context
+- **Response Generation**: GPT-4.1-mini synthesis with source attribution
+
+Each step includes timing metrics, token usage, and intermediate outputs for complete transparency.
+
+#### Voice Pipeline Tracing
+![Voice Pipeline Traces](docs/voice_pipeline.png)
+
+The voice processing trace shows the complete speech-to-text-to-speech flow:
+- **Speech-to-Text**: Audio transcription using Deepgram's Nova-2 model
+- **Query Analysis**: Processing of transcribed text through RAG pipeline
+- **Knowledge Retrieval**: Context-aware document search and ranking
+- **Response Generation**: Conversational response optimized for voice delivery
+- **Text-to-Speech**: Audio synthesis for natural voice response
+- **Conversation Storage**: Persistent memory storage for context retention
+
+Performance metrics include latency (0.00s shown), confidence scores (95%), and cost tracking ($0.01 per operation).
+
 ## 🔧 Development
 
 ### Project Structure
@@ -342,6 +373,10 @@ src/
 ├── lib/              # Core libraries (RAG, OpenAI, Pinecone)
 ├── utils/            # Utility functions
 └── types/            # TypeScript definitions
+
+docs/
+├── rag_traces.png    # RAG pipeline observability screenshot
+└── voice_pipeline.png # Voice processing trace screenshot
 
 Root files:
 ├── run-eval.js       # Evaluation runner
@@ -356,4 +391,5 @@ Root files:
 3. **Evaluation-Driven Development**: Continuous quality measurement
 4. **Memory Integration**: Persistent conversation context
 5. **Performance Optimization**: Caching and efficient retrieval
+6. **Observability**: Complete tracing and monitoring with LangFuse
 
