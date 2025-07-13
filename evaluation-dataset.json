@@ -1,0 +1,435 @@
+{
+  "metadata": {
+    "title": "Aven AI Customer Support - Comprehensive Evaluation Dataset",
+    "description": "Complete evaluation dataset with 50+ questions covering all aspects of Aven HELOC Credit Card",
+    "version": "1.0",
+    "created": "2025-01-13",
+    "total_questions": 52,
+    "categories": {
+      "product_features": 12,
+      "rates_fees": 10,
+      "rewards_benefits": 8,
+      "eligibility_requirements": 10,
+      "application_process": 6,
+      "partnerships_protection": 6
+    }
+  },
+  "questions": [
+    {
+      "id": 1,
+      "category": "product_features",
+      "complexity": "basic",
+      "question": "What is the maximum credit limit for the Aven HELOC card?",
+      "ground_truth": "The maximum credit limit is $250,000, subject to your home equity and creditworthiness.",
+      "expected_sources": ["credit_limits", "product_overview"]
+    },
+    {
+      "id": 2,
+      "category": "product_features",
+      "complexity": "basic",
+      "question": "What type of credit card is the Aven card?",
+      "ground_truth": "The Aven card is a HELOC (Home Equity Line of Credit) credit card that allows homeowners to access their home equity.",
+      "expected_sources": ["product_overview", "heloc_explanation"]
+    },
+    {
+      "id": 3,
+      "category": "product_features",
+      "complexity": "intermediate",
+      "question": "How does the Aven HELOC card work differently from a traditional credit card?",
+      "ground_truth": "The Aven HELOC card is secured by your home equity, typically offering higher credit limits, lower interest rates, and is designed specifically for homeowners to access their home's value.",
+      "expected_sources": ["product_comparison", "heloc_explanation"]
+    },
+    {
+      "id": 4,
+      "category": "product_features",
+      "complexity": "basic",
+      "question": "What network does the Aven card run on?",
+      "ground_truth": "The Aven card runs on the Visa network and can be used wherever Visa cards are accepted.",
+      "expected_sources": ["product_details", "network_info"]
+    },
+    {
+      "id": 5,
+      "category": "product_features",
+      "complexity": "intermediate",
+      "question": "Can I use my Aven card for international purchases?",
+      "ground_truth": "Yes, since the Aven card runs on the Visa network, it can be used for international purchases wherever Visa is accepted.",
+      "expected_sources": ["card_usage", "international_features"]
+    },
+    {
+      "id": 6,
+      "category": "product_features",
+      "complexity": "advanced",
+      "question": "What happens to my Aven card if my home value decreases?",
+      "ground_truth": "If your home value decreases significantly, it could affect your available credit limit, but Aven monitors this and will communicate any changes to your account.",
+      "expected_sources": ["risk_management", "home_value_impact"]
+    },
+    {
+      "id": 7,
+      "category": "product_features",
+      "complexity": "intermediate",
+      "question": "Is there a minimum credit limit for the Aven card?",
+      "ground_truth": "Yes, there are minimum credit limit requirements, though the specific amount depends on your home equity, creditworthiness, and other factors.",
+      "expected_sources": ["credit_limits", "minimum_requirements"]
+    },
+    {
+      "id": 8,
+      "category": "product_features",
+      "complexity": "basic",
+      "question": "Can I get multiple Aven cards?",
+      "ground_truth": "Typically, customers can have one Aven HELOC credit card per property, but specific policies may vary based on individual circumstances.",
+      "expected_sources": ["account_policies", "multiple_cards"]
+    },
+    {
+      "id": 9,
+      "category": "product_features",
+      "complexity": "intermediate",
+      "question": "Does the Aven card have contactless payment capability?",
+      "ground_truth": "Yes, the Aven Visa credit card includes contactless payment technology for convenient tap-to-pay transactions.",
+      "expected_sources": ["card_features", "payment_technology"]
+    },
+    {
+      "id": 10,
+      "category": "product_features",
+      "complexity": "intermediate",
+      "question": "Can I add authorized users to my Aven card?",
+      "ground_truth": "Yes, you can typically add authorized users to your Aven card account, subject to the card's terms and conditions.",
+      "expected_sources": ["account_management", "authorized_users"]
+    },
+    {
+      "id": 11,
+      "category": "product_features",
+      "complexity": "advanced",
+      "question": "How does Aven determine my available credit as I use the card?",
+      "ground_truth": "Your available credit is calculated based on your total credit limit minus your current balance and any pending transactions.",
+      "expected_sources": ["credit_calculation", "available_credit"]
+    },
+    {
+      "id": 12,
+      "category": "product_features",
+      "complexity": "intermediate",
+      "question": "Can I use my Aven card for cash advances?",
+      "ground_truth": "Cash advance availability depends on your specific card terms. Check your card agreement or contact Aven for details about cash advance features and fees.",
+      "expected_sources": ["cash_advances", "card_features"]
+    },
+    {
+      "id": 13,
+      "category": "rates_fees",
+      "complexity": "basic",
+      "question": "What are the interest rates for the Aven card?",
+      "ground_truth": "Variable interest rates range from 7.99% to 15.49%, with a maximum of 18% during the life of the account.",
+      "expected_sources": ["interest_rates", "pricing"]
+    },
+    {
+      "id": 14,
+      "category": "rates_fees",
+      "complexity": "basic",
+      "question": "Is there an annual fee for the Aven card?",
+      "ground_truth": "No, there is no annual fee for the Aven HELOC Credit Card.",
+      "expected_sources": ["fees", "no_annual_fee"]
+    },
+    {
+      "id": 15,
+      "category": "rates_fees",
+      "complexity": "intermediate",
+      "question": "Is there an autopay discount available?",
+      "ground_truth": "Yes, there is a 0.25% autopay discount available when you set up automatic payments.",
+      "expected_sources": ["autopay_discount", "payment_options"]
+    },
+    {
+      "id": 16,
+      "category": "rates_fees",
+      "complexity": "intermediate",
+      "question": "What fees are associated with balance transfers?",
+      "ground_truth": "Balance transfers are available with a 2.5% fee on the total amount being transferred.",
+      "expected_sources": ["balance_transfer", "fees"]
+    },
+    {
+      "id": 17,
+      "category": "rates_fees",
+      "complexity": "intermediate",
+      "question": "Are there any foreign transaction fees?",
+      "ground_truth": "Check your specific card agreement for foreign transaction fee details, as these can vary by card program.",
+      "expected_sources": ["foreign_fees", "international_usage"]
+    },
+    {
+      "id": 18,
+      "category": "rates_fees",
+      "complexity": "advanced",
+      "question": "How is the variable interest rate determined?",
+      "ground_truth": "The variable interest rate is typically based on market indices like the Prime Rate, plus a margin determined by your creditworthiness and other factors.",
+      "expected_sources": ["rate_calculation", "variable_rates"]
+    },
+    {
+      "id": 19,
+      "category": "rates_fees",
+      "complexity": "intermediate",
+      "question": "Is there a fee for notarization?",
+      "ground_truth": "No, there is no notarization fee for the Aven HELOC Credit Card application process.",
+      "expected_sources": ["application_fees", "notarization"]
+    },
+    {
+      "id": 20,
+      "category": "rates_fees",
+      "complexity": "intermediate",
+      "question": "What are the late payment fees?",
+      "ground_truth": "Late payment fees vary based on your card agreement. Contact Aven directly for specific late fee information.",
+      "expected_sources": ["late_fees", "payment_terms"]
+    },
+    {
+      "id": 21,
+      "category": "rates_fees",
+      "complexity": "intermediate",
+      "question": "Are there any overlimit fees?",
+      "ground_truth": "Overlimit fee policies depend on your specific card terms. Check your card agreement for details about overlimit charges.",
+      "expected_sources": ["overlimit_fees", "credit_limits"]
+    },
+    {
+      "id": 22,
+      "category": "rates_fees",
+      "complexity": "advanced",
+      "question": "How often can the variable interest rate change?",
+      "ground_truth": "Variable interest rates can change as market conditions change, typically following changes in the underlying index rates.",
+      "expected_sources": ["rate_changes", "variable_rate_terms"]
+    },
+    {
+      "id": 23,
+      "category": "rewards_benefits",
+      "complexity": "basic",
+      "question": "How much cashback do I earn with the Aven card?",
+      "ground_truth": "You earn 2% cashback on all purchases and 7% cashback on travel booked through Aven's travel portal.",
+      "expected_sources": ["cashback_rates", "rewards_program"]
+    },
+    {
+      "id": 24,
+      "category": "rewards_benefits",
+      "complexity": "intermediate",
+      "question": "How does the 7% travel cashback work?",
+      "ground_truth": "You earn 7% cashback when you book travel through Aven's dedicated travel portal, which offers access to flights, hotels, and other travel services.",
+      "expected_sources": ["travel_rewards", "travel_portal"]
+    },
+    {
+      "id": 25,
+      "category": "rewards_benefits",
+      "complexity": "intermediate",
+      "question": "Is there a limit on cashback earnings?",
+      "ground_truth": "Check your card agreement for any cashback earning limits or caps that may apply to your rewards program.",
+      "expected_sources": ["rewards_limits", "cashback_caps"]
+    },
+    {
+      "id": 26,
+      "category": "rewards_benefits",
+      "complexity": "intermediate",
+      "question": "How do I redeem my cashback rewards?",
+      "ground_truth": "Cashback rewards can typically be redeemed through your Aven account, either as statement credits, direct deposits, or other redemption options.",
+      "expected_sources": ["rewards_redemption", "cashback_redemption"]
+    },
+    {
+      "id": 27,
+      "category": "rewards_benefits",
+      "complexity": "intermediate",
+      "question": "When do cashback rewards post to my account?",
+      "ground_truth": "Cashback rewards typically post to your account monthly or according to the schedule outlined in your card agreement.",
+      "expected_sources": ["rewards_posting", "earning_schedule"]
+    },
+    {
+      "id": 28,
+      "category": "rewards_benefits",
+      "complexity": "advanced",
+      "question": "Do cashback rewards expire?",
+      "ground_truth": "Cashback reward expiration policies vary by program. Check your card agreement for specific terms about reward expiration.",
+      "expected_sources": ["rewards_expiration", "terms_conditions"]
+    },
+    {
+      "id": 29,
+      "category": "rewards_benefits",
+      "complexity": "intermediate",
+      "question": "Can I earn cashback on balance transfers?",
+      "ground_truth": "Typically, balance transfers do not earn cashback rewards. Only purchases usually qualify for cashback earnings.",
+      "expected_sources": ["qualifying_purchases", "balance_transfer_terms"]
+    },
+    {
+      "id": 30,
+      "category": "rewards_benefits",
+      "complexity": "intermediate",
+      "question": "Are there bonus cashback categories that rotate?",
+      "ground_truth": "The Aven card offers consistent 2% cashback on all purchases rather than rotating bonus categories, providing predictable rewards.",
+      "expected_sources": ["rewards_structure", "bonus_categories"]
+    },
+    {
+      "id": 31,
+      "category": "eligibility_requirements",
+      "complexity": "basic",
+      "question": "What credit score do I need for the Aven card?",
+      "ground_truth": "Typically a credit score of 600 or higher is required, though other factors like income and home equity are also considered.",
+      "expected_sources": ["credit_requirements", "eligibility_criteria"]
+    },
+    {
+      "id": 32,
+      "category": "eligibility_requirements",
+      "complexity": "basic",
+      "question": "What income do I need to qualify for Aven?",
+      "ground_truth": "You typically need stable income of $50,000 or more annually to qualify for the Aven card.",
+      "expected_sources": ["income_requirements", "qualification_criteria"]
+    },
+    {
+      "id": 33,
+      "category": "eligibility_requirements",
+      "complexity": "basic",
+      "question": "How much home equity do I need for Aven?",
+      "ground_truth": "You typically need at least $250,000 in home equity after existing mortgages and liens.",
+      "expected_sources": ["home_equity_requirements", "property_requirements"]
+    },
+    {
+      "id": 34,
+      "category": "eligibility_requirements",
+      "complexity": "intermediate",
+      "question": "Do I need to be a first-time homeowner?",
+      "ground_truth": "No, you do not need to be a first-time homeowner. The Aven card is available to any qualifying homeowner with sufficient equity.",
+      "expected_sources": ["homeowner_requirements", "eligibility_criteria"]
+    },
+    {
+      "id": 35,
+      "category": "eligibility_requirements",
+      "complexity": "intermediate",
+      "question": "Can I qualify if I'm self-employed?",
+      "ground_truth": "Yes, self-employed individuals can qualify if they meet the income, credit, and home equity requirements with proper documentation.",
+      "expected_sources": ["self_employed", "income_verification"]
+    },
+    {
+      "id": 36,
+      "category": "eligibility_requirements",
+      "complexity": "advanced",
+      "question": "What if I have a recent bankruptcy?",
+      "ground_truth": "Aven's automated underwriting system looks for 12 months to have passed since a bankruptcy discharge/dismissal, with at least 24 months since the last mortgage delinquency.",
+      "expected_sources": ["bankruptcy_requirements", "credit_history"]
+    },
+    {
+      "id": 37,
+      "category": "eligibility_requirements",
+      "complexity": "intermediate",
+      "question": "Are there geographic restrictions for the Aven card?",
+      "ground_truth": "Yes, the Aven card may not be available in all states. Check Aven's website for current state availability.",
+      "expected_sources": ["geographic_restrictions", "state_availability"]
+    },
+    {
+      "id": 38,
+      "category": "eligibility_requirements",
+      "complexity": "intermediate",
+      "question": "Can I qualify with a co-borrower?",
+      "ground_truth": "Co-borrower policies may be available depending on your situation. Contact Aven directly to discuss co-borrower options.",
+      "expected_sources": ["co_borrower", "joint_applications"]
+    },
+    {
+      "id": 39,
+      "category": "eligibility_requirements",
+      "complexity": "advanced",
+      "question": "What if my property is for sale?",
+      "ground_truth": "No, the application property cannot have an active sale listing during the origination process. Applications will be reviewed for active listings immediately after signing your Aven documents.",
+      "expected_sources": ["property_sale_restrictions", "application_requirements"]
+    },
+    {
+      "id": 40,
+      "category": "eligibility_requirements",
+      "complexity": "intermediate",
+      "question": "Can I qualify if I recently purchased my home?",
+      "ground_truth": "It may take 4-6 weeks for a property to appear on Aven's systems from the time of recording. Recent purchases may need to wait for proper verification.",
+      "expected_sources": ["recent_purchase", "property_verification"]
+    },
+    {
+      "id": 41,
+      "category": "application_process",
+      "complexity": "basic",
+      "question": "How fast can I get approved for an Aven card?",
+      "ground_truth": "Approval can be as fast as 5 minutes for qualified applicants using Aven's automated underwriting system.",
+      "expected_sources": ["approval_speed", "application_process"]
+    },
+    {
+      "id": 42,
+      "category": "application_process",
+      "complexity": "intermediate",
+      "question": "What documents do I need to apply?",
+      "ground_truth": "You'll typically need income verification, property information, and identity verification. Specific document requirements depend on your situation.",
+      "expected_sources": ["required_documents", "application_requirements"]
+    },
+    {
+      "id": 43,
+      "category": "application_process",
+      "complexity": "intermediate",
+      "question": "How long is my offer valid?",
+      "ground_truth": "Applicants have 30 calendar days to accept and finish signing, after which the offer will expire.",
+      "expected_sources": ["offer_validity", "application_timeline"]
+    },
+    {
+      "id": 44,
+      "category": "application_process",
+      "complexity": "intermediate",
+      "question": "Can I cancel my application?",
+      "ground_truth": "Yes, you can cancel your application by exiting before completion or contacting Aven customer support if already submitted. There's no fee for cancellation.",
+      "expected_sources": ["application_cancellation", "cancellation_process"]
+    },
+    {
+      "id": 45,
+      "category": "application_process",
+      "complexity": "advanced",
+      "question": "What happens if additional documentation is required?",
+      "ground_truth": "If additional documents like income verification or trust documents are requested, they must be provided within the same 30-day window as your initial offer.",
+      "expected_sources": ["additional_documentation", "application_timeline"]
+    },
+    {
+      "id": 46,
+      "category": "application_process",
+      "complexity": "intermediate",
+      "question": "Is there a hard credit check?",
+      "ground_truth": "Yes, applying for the Aven card will typically involve a hard credit inquiry as part of the underwriting process.",
+      "expected_sources": ["credit_check", "application_process"]
+    },
+    {
+      "id": 47,
+      "category": "partnerships_protection",
+      "complexity": "basic",
+      "question": "What bank issues the Aven card?",
+      "ground_truth": "The Aven Visa Credit Card is issued by Coastal Community Bank.",
+      "expected_sources": ["issuing_bank", "partnerships"]
+    },
+    {
+      "id": 48,
+      "category": "partnerships_protection",
+      "complexity": "intermediate",
+      "question": "Does Aven make any money from Debt Protection?",
+      "ground_truth": "No, Aven does not make any money from this product. We offer it solely to provide our customers with peace of mind when using their home equity. The costs charged are passed directly through from Securian Financial.",
+      "expected_sources": ["debt_protection", "securian_partnership"]
+    },
+    {
+      "id": 49,
+      "category": "partnerships_protection",
+      "complexity": "intermediate",
+      "question": "What is debt protection and how does it work?",
+      "ground_truth": "Debt protection helps cover your payments in certain circumstances like job loss, disability, or death. It's provided through Securian Financial with costs passed through directly.",
+      "expected_sources": ["debt_protection_details", "protection_benefits"]
+    },
+    {
+      "id": 50,
+      "category": "partnerships_protection",
+      "complexity": "advanced",
+      "question": "How does Aven ensure the security of my financial information?",
+      "ground_truth": "Aven employs bank-level security measures, encryption, and follows industry-standard practices to protect your financial and personal information.",
+      "expected_sources": ["security_measures", "data_protection"]
+    },
+    {
+      "id": 51,
+      "category": "partnerships_protection",
+      "complexity": "intermediate",
+      "question": "What happens if Coastal Community Bank changes policies?",
+      "ground_truth": "Any policy changes by the issuing bank would be communicated to cardholders according to your card agreement and applicable regulations.",
+      "expected_sources": ["policy_changes", "bank_relationship"]
+    },
+    {
+      "id": 52,
+      "category": "partnerships_protection",
+      "complexity": "advanced",
+      "question": "How does Aven handle disputes with transactions?",
+      "ground_truth": "Transaction disputes are handled through standard Visa dispute processes, with support from both Aven and Coastal Community Bank as the issuing bank.",
+      "expected_sources": ["dispute_resolution", "transaction_disputes"]
+    }
+  ]
+}
