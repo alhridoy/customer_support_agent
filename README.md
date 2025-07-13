@@ -15,67 +15,159 @@ This system solves the complete customer support challenge through a sophisticat
 
 ```mermaid
 graph TB
-    subgraph "🎯 User Interfaces"
+    subgraph UI ["User Interfaces"]
         UI1[Web Chat Interface]
-        UI2[Voice Interface (VAPI)]
+        UI2[Voice Interface VAPI]
+        UI3[Mobile API Clients]
     end
 
-    subgraph "🧠 Core Processing Engine"
+    subgraph API ["API Layer"]
+        API1[/api/chat]
+        API2[/api/voice/webhook]
+        API3[/api/meetings]
+        API4[/api/evaluate]
+    end
+
+    subgraph PROC ["Core Processing Engine"]
         PROC1[RAG Pipeline]
         PROC2[Agentic Retrieval]
         PROC3[Response Generation]
+        PROC4[Voice Processing]
     end
 
-    subgraph "📚 Knowledge & Memory Layer"
-        KB1[Pinecone Vector DB<br/>Aven.com Content]
-        KB2[MEM0 Memory<br/>Conversation Context]
+    subgraph KB ["Knowledge & Memory"]
+        KB1[Pinecone Vector DB]
+        KB2[MEM0 Memory System]
         KB3[Semantic Cache]
+        KB4[Aven.com Content]
     end
 
-    subgraph "🤖 AI Models"
-        AI1[GPT-4.1-mini<br/>Response Generation]
-        AI2[text-embedding-3-small<br/>Vector Embeddings]
+    subgraph AI ["AI Models"]
+        AI1[GPT-4.1-mini]
+        AI2[text-embedding-3-small]
+        AI3[gpt-4o-transcribe]
+        AI4[gpt-4o-mini-tts]
     end
 
-    subgraph "🧪 Evaluation & Monitoring"
-        EVAL1[RAGAS Framework]
-        EVAL2[Custom Metrics]
-        EVAL3[Real-time Monitoring]
+    subgraph EVAL ["Evaluation System"]
+        EVAL1[50+ Test Questions]
+        EVAL2[RAGAS Framework]
+        EVAL3[LangFuse Analytics]
+        EVAL4[Performance Metrics]
     end
 
-    UI1 --> PROC1
-    UI2 --> PROC1
+    subgraph EXT ["External Services"]
+        EXT1[OpenAI API]
+        EXT2[Pinecone DB]
+        EXT3[VAPI Service]
+        EXT4[MEM0 Service]
+    end
+
+    %% User Flow
+    UI1 --> API1
+    UI2 --> API2
+    UI3 --> API1
+
+    %% API Processing
+    API1 --> PROC1
+    API2 --> PROC4
+    API3 --> PROC1
+    API4 --> EVAL1
+
+    %% Core Processing
     PROC1 --> PROC2
     PROC2 --> KB1
     PROC1 --> KB2
     PROC1 --> KB3
+    PROC4 --> AI3
+    PROC4 --> AI4
+
+    %% AI Integration
     PROC1 --> AI1
+    PROC2 --> AI2
     KB1 --> AI2
-    PROC3 --> EVAL1
-    PROC3 --> EVAL2
-    PROC3 --> EVAL3
+
+    %% External Connections
+    AI1 --> EXT1
+    AI2 --> EXT1
+    AI3 --> EXT1
+    AI4 --> EXT1
+    KB1 --> EXT2
+    KB2 --> EXT4
+    UI2 --> EXT3
+
+    %% Evaluation Flow
+    PROC1 --> EVAL1
+    EVAL1 --> EVAL2
+    EVAL2 --> EVAL3
+    EVAL3 --> EVAL4
+
+    %% Data Sources
+    KB4 --> KB1
+
+    %% Styling
+    classDef userInterface fill:#e1f5fe
+    classDef apiLayer fill:#f3e5f5
+    classDef processing fill:#e8f5e8
+    classDef knowledge fill:#fff3e0
+    classDef aiModels fill:#fce4ec
+    classDef evaluation fill:#f1f8e9
+    classDef external fill:#f5f5f5
+
+    class UI1,UI2,UI3 userInterface
+    class API1,API2,API3,API4 apiLayer
+    class PROC1,PROC2,PROC3,PROC4 processing
+    class KB1,KB2,KB3,KB4 knowledge
+    class AI1,AI2,AI3,AI4 aiModels
+    class EVAL1,EVAL2,EVAL3,EVAL4 evaluation
+    class EXT1,EXT2,EXT3,EXT4 external
 ```
 
-## 🔄 End-to-End Processing Flow
+## 🔄 User Query Processing Flow
 
-### 1. **Query Processing**
-```
-User Query → Query Analysis → Intent Classification → Context Retrieval
+```mermaid
+sequenceDiagram
+    participant User
+    participant WebUI as Web Interface
+    participant API as API Layer
+    participant RAG as RAG Pipeline
+    participant Vector as Vector DB
+    participant Memory as MEM0 Memory
+    participant GPT as GPT-4.1-mini
+    participant Eval as Evaluation
+
+    User->>WebUI: Ask question about Aven
+    WebUI->>API: POST /api/chat
+    API->>RAG: Process query
+    RAG->>Memory: Get conversation context
+    Memory-->>RAG: Return context
+    RAG->>Vector: Search knowledge base
+    Vector-->>RAG: Return relevant docs
+    RAG->>GPT: Generate response with context
+    GPT-->>RAG: Return structured answer
+    RAG->>Memory: Store interaction
+    RAG->>Eval: Log for evaluation
+    RAG-->>API: Response with sources
+    API-->>WebUI: JSON response
+    WebUI-->>User: Display answer with citations
 ```
 
-### 2. **Multi-Strategy Retrieval**
-```
-Vector Search + Keyword Search + Memory Retrieval → Document Ranking → Context Assembly
-```
+## 🎤 Voice Processing Pipeline
 
-### 3. **Response Generation**
-```
-Context + Query + Memory → GPT-4.1-mini → Structured Response → Source Attribution
-```
+```mermaid
+graph LR
+    A[Voice Input] --> B[gpt-4o-transcribe]
+    B --> C[Text Query]
+    C --> D[RAG Pipeline]
+    D --> E[GPT-4.1-mini]
+    E --> F[Text Response]
+    F --> G[gpt-4o-mini-tts]
+    G --> H[Voice Output]
 
-### 4. **Quality Assurance**
-```
-Response → RAGAS Evaluation → Custom Metrics → Performance Tracking → Continuous Improvement
+    style A fill:#e1f5fe
+    style H fill:#e1f5fe
+    style D fill:#e8f5e8
+    style E fill:#fce4ec
 ```
 
 ## 🚀 Key System Components
