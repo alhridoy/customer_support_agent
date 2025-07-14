@@ -195,7 +195,7 @@ graph LR
 
 ## 📊 Performance Metrics & Evaluation Results
 
-### Overall System Performance (Grade C - 65.4%)
+
 
 | Metric | Score | Grade | Description |
 |--------|-------|-------|-------------|
