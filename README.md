@@ -201,9 +201,9 @@ graph LR
 | **Faithfulness** | 71.6% | B | Response grounding in retrieved context |
 | **Semantic Similarity** | 67.1% | C+ | Similarity to expected answers |
 
-### RAGAS Evaluation Metrics (Industry Standard - Real Results)
+### RAGAS Evaluation Metrics 
 
-| RAGAS Metric | Score Range | Description | **Our Real Score** |
+| RAGAS Metric | Score Range | Description | **Our Score** |
 |--------------|-------------|-------------|-------------------|
 | **Faithfulness** | 0.0 - 1.0 | Measures response grounding in retrieved context | **0.716 (Good)** |
 | **Answer Relevancy** | 0.0 - 1.0 | Evaluates how well answers address specific questions | **0.765 (Good)** |
@@ -234,10 +234,6 @@ I developed a strategic approach to generate realistic evaluation data covering 
 }
 ```
 
-#### **📊 Complexity Distribution**
-- **Basic (40%)**: Direct product information queries
-- **Intermediate (40%)**: Multi-faceted synthesis questions  
-- **Advanced (20%)**: Complex comparisons & edge cases
 
 #### **🔍 Question Generation Methodology**
 
