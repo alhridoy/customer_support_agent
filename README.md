@@ -6,10 +6,6 @@ A production-ready AI customer support system built for Aven's HELOC Credit Card
 
 This system solves the complete customer support challenge through a sophisticated multi-modal AI architecture that provides accurate, source-backed responses across text and voice interfaces.
 
-### Core Problem Solved
-- **Challenge**: Provide accurate, real-time customer support for complex financial products
-- **Solution**: Multi-modal RAG system with voice integration and continuous evaluation
-- **Result**: 84.5% overall performance with 92.7% helpfulness score
 
 ## 🏗️ System Architecture
 
