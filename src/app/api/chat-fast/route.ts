@@ -5,9 +5,17 @@ import { addToMemory, getMemoryContext } from '@/lib/memory'
 import { RAGResponse } from '@/types'
 import { getInstantResponse } from '@/lib/fast-responses'
 
-// Simple in-memory cache for common queries
+// TODO: Replace with Redis for production horizontal scaling
+// In-memory cache is not suitable for multi-instance deployments
+// Each instance maintains separate cache state, leading to cache misses
 const responseCache = new Map<string, { response: RAGResponse; timestamp: number }>()
 const CACHE_TTL = 5 * 60 * 1000 // 5 minutes cache
+
+// Production Redis implementation would look like:
+// import Redis from 'ioredis'
+// const redis = new Redis(process.env.REDIS_URL)
+// const getCachedResponse = async (key: string) => await redis.get(key)
+// const setCachedResponse = async (key: string, value: string, ttl: number) => await redis.setex(key, ttl, value)
 
 export async function POST(request: NextRequest) {
   try {

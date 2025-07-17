@@ -157,9 +157,11 @@ export async function testVectorDatabase(): Promise<RAGTestResult[]> {
 export async function testExaDataFetching(): Promise<RAGTestResult[]> {
   const tests: RAGTestResult[] = []
 
+  // Initialize Exa client once for all tests
+  const exa = new Exa(process.env.EXA_API_KEY || '')
+
   // Test 1: Exa API Connection
   try {
-    const exa = new Exa(process.env.EXA_API_KEY || '')
     const testSearch = await exa.search("Aven HELOC", {
       numResults: 1,
       includeDomains: ['aven.com']
@@ -186,7 +188,6 @@ export async function testExaDataFetching(): Promise<RAGTestResult[]> {
 
   // Test 2: Aven.com Domain Coverage
   try {
-    const exa = new Exa(process.env.EXA_API_KEY || '')
     const avenQueries = [
       "Aven HELOC credit card",
       "Aven application process", 
@@ -236,7 +237,6 @@ export async function testExaDataFetching(): Promise<RAGTestResult[]> {
 
   // Test 3: Content Quality & Accuracy
   try {
-    const exa = new Exa(process.env.EXA_API_KEY || '')
     const searchResult = await exa.search("Aven HELOC credit card features", {
       numResults: 2,
       includeDomains: ['aven.com']

@@ -27,8 +27,7 @@ import pandas as pd
 from dotenv import load_dotenv
 import numpy as np
 from datetime import datetime
-# import matplotlib.pyplot as plt
-# import seaborn as sns
+# Visualization libraries removed - not currently implemented
 
 # Load environment variables
 load_dotenv(dotenv_path='.env.local')
@@ -40,8 +39,10 @@ class EnhancedRAGEvaluator:
             raise ValueError("OPENAI_API_KEY not found in environment variables")
         
         # Initialize models for RAGAS evaluation
+        # Use environment variable for model consistency with application
+        evaluation_model = os.getenv('EVALUATION_MODEL', 'gpt-4o-mini')
         self.llm_evaluator = ChatOpenAI(
-            model="gpt-4.1-mini",
+            model=evaluation_model,
             temperature=0,
             api_key=self.openai_api_key
         )
@@ -469,65 +470,11 @@ class EnhancedRAGEvaluator:
         print("📊 Performance charts disabled (matplotlib not available)")
 
     def create_performance_chart(self, ragas_scores: Dict[str, float], custom_metrics: Dict[str, float], timestamp: str):
-        """Create performance visualization charts"""
-        fig, ((ax1, ax2), (ax3, ax4)) = plt.subplots(2, 2, figsize=(15, 12))
-        fig.suptitle('GPT-4.1-Mini RAG Pipeline Performance Analysis', fontsize=16, fontweight='bold')
-        
-        # RAGAS scores chart
-        metrics = list(ragas_scores.keys())
-        scores = list(ragas_scores.values())
-        colors = ['#2E8B57' if s >= 0.7 else '#FF6B35' if s >= 0.5 else '#C41E3A' for s in scores]
-        
-        ax1.bar(metrics, scores, color=colors)
-        ax1.set_title('RAGAS Industry-Standard Metrics', fontweight='bold')
-        ax1.set_ylabel('Score')
-        ax1.set_ylim(0, 1)
-        ax1.tick_params(axis='x', rotation=45)
-        
-        # Custom metrics chart
-        custom_names = [k.replace('avg_', '').replace('_', ' ').title() for k in custom_metrics.keys() if k.startswith('avg_')]
-        custom_vals = [v for k, v in custom_metrics.items() if k.startswith('avg_')]
-        custom_colors = ['#2E8B57' if s >= 0.7 else '#FF6B35' if s >= 0.5 else '#C41E3A' for s in custom_vals]
-        
-        ax2.bar(custom_names, custom_vals, color=custom_colors)
-        ax2.set_title('Custom Evaluation Metrics', fontweight='bold')
-        ax2.set_ylabel('Score')
-        ax2.set_ylim(0, 1)
-        ax2.tick_params(axis='x', rotation=45)
-        
-        # Combined radar chart for overall performance
-        all_metrics = metrics + custom_names
-        all_scores = scores + custom_vals
-        
-        # Score distribution
-        score_ranges = ['Excellent (≥0.8)', 'Good (0.6-0.8)', 'Fair (0.4-0.6)', 'Poor (<0.4)']
-        score_counts = [
-            sum(1 for s in all_scores if s >= 0.8),
-            sum(1 for s in all_scores if 0.6 <= s < 0.8),
-            sum(1 for s in all_scores if 0.4 <= s < 0.6),
-            sum(1 for s in all_scores if s < 0.4)
-        ]
-        
-        ax3.pie(score_counts, labels=score_ranges, autopct='%1.1f%%', startangle=90)
-        ax3.set_title('Score Distribution', fontweight='bold')
-        
-        # Performance trend (simulated for demonstration)
-        evaluation_points = ['Baseline\n(gpt-4o-mini)', 'Current\n(gpt-4.1-mini)', 'Target\n(Future)']
-        performance_trend = [0.75, np.mean(all_scores), 0.90]  # Simulated data
-        
-        ax4.plot(evaluation_points, performance_trend, marker='o', linewidth=3, markersize=8, color='#2E8B57')
-        ax4.fill_between(evaluation_points, performance_trend, alpha=0.3, color='#2E8B57')
-        ax4.set_title('Performance Trend', fontweight='bold')
-        ax4.set_ylabel('Overall Score')
-        ax4.set_ylim(0, 1)
-        ax4.grid(True, alpha=0.3)
-        
-        plt.tight_layout()
-        chart_filename = f'rag-performance-analysis-{timestamp}.png'
-        plt.savefig(chart_filename, dpi=300, bbox_inches='tight')
-        plt.close()
-        
-        print(f"📊 Performance chart saved to: {chart_filename}")
+        """Performance charts feature disabled - matplotlib dependencies not configured"""
+        print(f"📊 Performance visualization disabled for {timestamp}")
+        print(f"📋 RAGAS scores: {len(ragas_scores)} metrics")
+        print(f"📋 Custom metrics: {len(custom_metrics)} metrics")
+        return  # Early return to skip chart generation
 
     def get_score_grade(self, score: float) -> str:
         """Convert score to letter grade"""

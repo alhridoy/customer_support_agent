@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { z } from 'zod'
 import { searchKnowledgeBase } from '@/lib/pinecone'
 import { generateResponse } from '@/lib/openai'
 import { addToMemory, getMemoryContext } from '@/lib/memory'
@@ -10,19 +11,50 @@ import { createRAGTrace } from '@/lib/langfuse'
 import { getInstantResponse } from '@/lib/fast-responses'
 import { processWithRAGPipeline } from '@/lib/rag-pipeline'
 
+// Input validation schema
+const chatRequestSchema = z.object({
+  message: z.string()
+    .trim()
+    .min(1, 'Message cannot be empty')
+    .max(2000, 'Message too long (max 2000 characters)'),
+  userId: z.string()
+    .trim()
+    .min(1, 'User ID is required')
+    .max(100, 'User ID too long')
+    .default('anonymous'),
+  sessionId: z.string()
+    .trim()
+    .max(100, 'Session ID too long')
+    .optional(),
+  customerNotes: z.string()
+    .trim()
+    .max(1000, 'Customer notes too long (max 1000 characters)')
+    .optional(),
+  useFullPipeline: z.boolean().default(true),
+})
+
 export async function POST(request: NextRequest) {
   try {
     console.log('🚀 Chat API called')
     const startTime = Date.now()
-    const { message, userId = 'anonymous', sessionId, useFullPipeline = true } = await request.json()
-    console.log('📝 Message:', message)
 
-    if (!message) {
+    // Parse and validate request body
+    const body = await request.json()
+    const validationResult = chatRequestSchema.safeParse(body)
+
+    if (!validationResult.success) {
+      const errors = validationResult.error.errors.map(err =>
+        `${err.path.join('.')}: ${err.message}`
+      ).join(', ')
+
       return NextResponse.json(
-        { error: 'Message is required' },
+        { error: `Invalid input: ${errors}` },
         { status: 400 }
       )
     }
+
+    const { message, userId, sessionId, customerNotes, useFullPipeline } = validationResult.data
+    console.log('📝 Message:', message.substring(0, 100) + (message.length > 100 ? '...' : ''))
 
     // Check for instant responses first while keeping full pipeline for complex queries
     const instantResponse = getInstantResponse(message)

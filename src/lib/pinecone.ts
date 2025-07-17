@@ -1,13 +1,36 @@
 import { Pinecone } from '@pinecone-database/pinecone'
 import { AvenKnowledgeItem } from '@/types'
+import { pineconeConfig } from '@/config'
+
+// Custom error classes for better error handling
+export class PineconeConnectionError extends Error {
+  constructor(message: string, public originalError?: Error) {
+    super(message)
+    this.name = 'PineconeConnectionError'
+  }
+}
+
+export class PineconeQueryError extends Error {
+  constructor(message: string, public originalError?: Error) {
+    super(message)
+    this.name = 'PineconeQueryError'
+  }
+}
 
 let pinecone: Pinecone | null = null
 
 export async function initializePinecone() {
   if (!pinecone) {
-    pinecone = new Pinecone({
-      apiKey: process.env.PINECONE_API_KEY || '',
-    })
+    try {
+      pinecone = new Pinecone({
+        apiKey: pineconeConfig.apiKey,
+      })
+    } catch (error) {
+      throw new PineconeConnectionError(
+        'Failed to initialize Pinecone client',
+        error instanceof Error ? error : new Error(String(error))
+      )
+    }
   }
 
   return { pinecone }
@@ -47,8 +70,29 @@ export async function searchKnowledgeBase(query: string): Promise<AvenKnowledgeI
 
     return results
   } catch (error) {
-    console.error('Error searching knowledge base:', error)
-    return []
+    // Log detailed error information for debugging
+    console.error('Pinecone search error details:', {
+      query: query.substring(0, 100),
+      topK,
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      timestamp: new Date().toISOString()
+    })
+
+    // Throw specific error types for better upstream handling
+    if (error instanceof Error) {
+      if (error.message.includes('rate limit') || error.message.includes('429')) {
+        throw new PineconeQueryError('Rate limit exceeded, please try again later', error)
+      } else if (error.message.includes('authentication') || error.message.includes('401')) {
+        throw new PineconeQueryError('Authentication failed, check API key', error)
+      } else if (error.message.includes('network') || error.message.includes('timeout')) {
+        throw new PineconeQueryError('Network error, please try again', error)
+      }
+    }
+
+    throw new PineconeQueryError('Failed to search knowledge base',
+      error instanceof Error ? error : new Error(String(error))
+    )
   }
 }
 

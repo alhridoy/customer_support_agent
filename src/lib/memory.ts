@@ -1,12 +1,25 @@
-// Import mem0ai properly
-let Memory: any
+import { mem0Config } from '@/config'
+
+// Simplified interface for MEM0 API with better type safety
+interface IMemory {
+  add(messages: any, options?: any): Promise<any>
+  search(query: string, options?: any): Promise<any>
+  get_all?(options?: any): Promise<any>
+  getAll?(options?: any): Promise<any>
+  delete?(memory_id: string): Promise<any>
+  deleteAll?(options?: any): Promise<any>
+  update?(memory_id: string, data: string): Promise<any>
+}
+
+// Import mem0ai with proper error handling
+let Memory: new (config: { apiKey: string }) => IMemory
 try {
   Memory = require('mem0ai').Memory
 } catch (error) {
   console.warn('mem0ai cloud version not available, falling back to OSS')
 }
 
-let memory: any = null
+let memory: IMemory | null = null
 
 export async function initializeMemory() {
   if (!memory) {
@@ -124,11 +137,11 @@ export async function getAllMemories(userId: string) {
 
     if (mem0ApiKey) {
       // Cloud version
-      const memories = await mem.getAll({ user_id: userId })
+      const memories = await mem?.getAll?.({ user_id: userId }) || []
       return memories
     } else {
       // OSS version
-      const memories = await mem.getAll({ userId })
+      const memories = await mem?.getAll?.({ userId }) || []
       return memories
     }
   } catch (error) {
@@ -164,12 +177,12 @@ export async function deleteUserMemories(userId: string) {
 
     if (mem0ApiKey) {
       // Cloud version
-      await mem.deleteAll({ user_id: userId })
+      await mem?.deleteAll?.({ user_id: userId })
       console.log(`All memories deleted for user: ${userId} (cloud)`)
       return true
     } else {
       // OSS version
-      await mem.deleteAll({ userId })
+      await mem?.deleteAll?.({ userId })
       console.log(`All memories deleted for user: ${userId} (OSS)`)
       return true
     }
