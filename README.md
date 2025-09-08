@@ -1,6 +1,6 @@
-# Aven AI Customer Support Agent
+# AI Customer Support Agent
 
-A production-ready AI customer support system built for Aven's HELOC Credit Card, featuring advanced RAG architecture, voice interface integration, and comprehensive evaluation framework.
+A production-ready AI customer support system built  featuring advanced RAG architecture, voice interface integration, and comprehensive evaluation framework.
 
 ## 🎯 System Design Overview
 
