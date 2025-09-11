@@ -219,7 +219,7 @@ graph LR
 
 **Success Rate:** 52/52 questions evaluated (100% completion)
 
-### RAGAS Industry Standard Evaluation (12 Questions)
+### RAGAS  Evaluation (12 Questions)
 
 | Metric | Score | Grade | Description |
 |--------|-------|-------|-------------|
@@ -229,7 +229,7 @@ graph LR
 | **Faithfulness** | 71.6% | B | Response grounding in retrieved context |
 | **Semantic Similarity** | 67.1% | C+ | Similarity to expected answers |
 
-### RAGAS Evaluation Metrics (Industry Standard - Real Results)
+### RAGAS Evaluation Metrics 
 
 | RAGAS Metric | Score Range | Description | **Our Real Score** |
 |--------------|-------------|-------------|-------------------|
@@ -281,7 +281,7 @@ Discovery → Research → Application → Usage → Support
 Questions about features, rates, eligibility, benefits, help
 ```
 
-**3. Realistic Question Patterns**
+**3.  Question Patterns**
 - **Factual**: "What is the maximum credit limit?"
 - **Comparative**: "How does Aven compare to traditional cards?"  
 - **Procedural**: "How fast can I get approved?"
@@ -418,25 +418,6 @@ node run-eval.js --rag-health
 - **Application Process**: Steps, timing, documentation
 - **Partnerships**: Bank relationships, integrations
 
-## 🌐 API Endpoints
-
-### Core APIs
-- `POST /api/chat` - Main text chat with RAG pipeline
-- `POST /api/voice/webhook` - VAPI voice interface webhook
-- `POST /api/evaluate` - Comprehensive evaluation system
-- `GET/POST /api/meetings` - Meeting scheduler
-
-### Usage Example
-```javascript
-const response = await fetch('/api/chat', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({
-    message: "What are Aven's interest rates?",
-    sessionId: "user-session-123"
-  })
-});
-```
 
 ## 🎯 System Highlights
 
